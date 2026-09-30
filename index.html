@@ -28,9 +28,9 @@
                 </div>
             </div>
             <div class="flex items-center space-x-3">
-                <div id="nav-wallet-badge" class="hidden sm:flex items-center space-x-2 px-3 py-1.5 bg-gray-900 border border-gray-800 rounded-xl text-xs font-mono text-emerald-400">
+                <div id="nav-wallet-badge" class="flex items-center space-x-2 px-3 py-1.5 bg-gray-900 border border-gray-800 rounded-xl text-xs font-mono text-emerald-400">
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span id="nav-address-display">Not Logged In</span>
+                    <span id="nav-address-display">Active Wallet</span>
                 </div>
                 <a href="#simulator" class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-400 rounded-xl text-xs font-bold transition-all">
                     Launch App
@@ -63,33 +63,15 @@
         <div id="wallet-section" class="max-w-xl mx-auto mb-16 p-6 md:p-8 rounded-2xl bg-gray-900/90 border border-gray-800 shadow-2xl">
             <div class="text-center mb-6">
                 <h3 class="text-2xl font-bold text-white mb-2">BAM Wallet Portal</h3>
-                <p class="text-sm text-gray-400">Create a new secure account or login using your wallet credentials.</p>
+                <p class="text-sm text-gray-400">Your automatic secure session key for mining and transfers.</p>
             </div>
 
-            <!-- Logged Out View -->
-            <div id="auth-box" class="space-y-4">
-                <button onclick="createAccount()" class="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/20">
-                    Create New Account / Wallet 🔑
-                </button>
-                <div class="relative flex py-2 items-center">
-                    <div class="flex-grow border-t border-gray-800"></div>
-                    <span class="flex-shrink mx-4 text-xs font-mono text-gray-500 uppercase">Or Login with Address</span>
-                    <div class="flex-grow border-t border-gray-800"></div>
-                </div>
-                <div>
-                    <input id="login-address-input" type="text" placeholder="Paste your wallet address (e.g. BAM_...)" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 mb-3 font-mono">
-                    <button onclick="loginAccount()" class="w-full py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-xl transition-all text-sm">
-                        Access Existing Account
-                    </button>
-                </div>
-            </div>
-
-            <!-- Logged In View (Hidden by default) -->
-            <div id="dashboard-box" class="hidden space-y-4">
+            <!-- Dashboard View -->
+            <div id="dashboard-box" class="space-y-4">
                 <div class="bg-gray-950 p-5 rounded-xl border border-emerald-500/30 space-y-3 font-mono text-xs">
                     <div class="flex justify-between items-center text-gray-400">
-                        <span>Account Status:</span>
-                        <span class="text-emerald-400 font-bold">Connected Active</span>
+                        <span>Node Status:</span>
+                        <span class="text-emerald-400 font-bold">Synced & Ready</span>
                     </div>
                     <div class="flex flex-col space-y-1">
                         <span class="text-gray-500">Your Wallet Address:</span>
@@ -100,8 +82,8 @@
                         <span id="user-display-balance" class="text-emerald-400 font-bold text-base">0 BAM</span>
                     </div>
                 </div>
-                <button onclick="logoutAccount()" class="w-full py-3 bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 text-red-400 font-semibold rounded-xl transition-all text-sm">
-                    Lock / Logout Account
+                <button onclick="createAccount()" class="w-full py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-xl transition-all text-sm">
+                    Generate New Wallet Address 🔄
                 </button>
             </div>
         </div>
@@ -137,7 +119,7 @@
                     <div class="space-y-4">
                         <div>
                             <label class="block text-xs font-mono text-gray-400 mb-1.5">SENDER WALLET</label>
-                            <input id="tx-sender" type="text" readonly value="Login to set sender" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-gray-500 font-mono focus:outline-none">
+                            <input id="tx-sender" type="text" readonly class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-emerald-400 font-mono focus:outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-mono text-gray-400 mb-1.5">RECIPIENT ADDRESS</label>
@@ -174,7 +156,7 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-gray-500">Miner Destination:</span>
-                            <span id="miner-dest-badge" class="text-amber-400 font-bold">Login required</span>
+                            <span id="miner-dest-badge" class="text-emerald-400 font-bold truncate max-w-[150px]">Auto-assigned</span>
                         </div>
                     </div>
                 </div>
@@ -223,34 +205,20 @@
         }];
 
         let pendingTransactions = [];
-        let currentUser = null;
+        let currentUser = localStorage.getItem('bam_active_user');
 
-        async function createAccount() {
+        // Auto-create wallet if none exists
+        if (!currentUser) {
+            const randomHex = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+            currentUser = `BAM_${randomHex}`;
+            localStorage.setItem('bam_active_user', currentUser);
+        }
+
+        function createAccount() {
             const randomHex = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
             currentUser = `BAM_${randomHex}`;
             localStorage.setItem('bam_active_user', currentUser);
             updateUI();
-            alert(`Account created successfully!\n\nYour Address:\n${currentUser}`);
-        }
-
-        function loginAccount() {
-            const inputVal = document.getElementById('login-address-input').value.trim();
-            if (!inputVal) {
-                alert('Please enter a valid wallet address to login.');
-                return;
-            }
-            currentUser = inputVal;
-            localStorage.setItem('bam_active_user', currentUser);
-            document.getElementById('login-address-input').value = '';
-            updateUI();
-            alert(`Successfully logged into account: ${currentUser}`);
-        }
-
-        function logoutAccount() {
-            currentUser = null;
-            localStorage.removeItem('bam_active_user');
-            updateUI();
-            alert('Logged out of wallet session.');
         }
 
         function calculateBalance(address) {
@@ -269,36 +237,24 @@
         }
 
         async function addTransaction() {
-            if (!currentUser) {
-                alert('Please login or create a wallet account first!');
-                return;
-            }
             const recipient = document.getElementById('tx-recipient').value.trim();
             const amount = parseFloat(document.getElementById('tx-amount').value);
 
             if (!recipient || isNaN(amount) || amount <= 0) {
-                alert('Please check recipient address and amount.');
                 return;
             }
 
             const currentBalance = calculateBalance(currentUser);
             if (amount > currentBalance) {
-                alert(`Insufficient balance! You have ${currentBalance} BAM available.`);
                 return;
             }
 
             pendingTransactions.push({ sender: currentUser, recipient, amount });
             document.getElementById('tx-recipient').value = '';
             updateUI();
-            alert('Transaction successfully broadcasted to the mempool queue!');
         }
 
         async function mineBlock() {
-            if (!currentUser) {
-                alert('Please login or create an account to receive mining block rewards!');
-                return;
-            }
-
             const lastBlock = blockchain[blockchain.length - 1];
             let newNonce = 0;
             let blockData = '';
@@ -323,38 +279,14 @@
             blockchain.push(newBlock);
             pendingTransactions = [];
             updateUI();
-            alert(`Success! Block #${newBlock.index} mined. 50 BAM reward credited to your account!`);
         }
 
         function updateUI() {
-            // Check localStorage session on load
-            if (!currentUser && localStorage.getItem('bam_active_user')) {
-                currentUser = localStorage.getItem('bam_active_user');
-            }
-
-            const authBox = document.getElementById('auth-box');
-            const dashBox = document.getElementById('dashboard-box');
-            const navBadge = document.getElementById('nav-wallet-badge');
-            const navDisplay = document.getElementById('nav-address-display');
-            const txSenderInput = document.getElementById('tx-sender');
-            const minerBadge = document.getElementById('miner-dest-badge');
-
-            if (currentUser) {
-                authBox.classList.add('hidden');
-                dashBox.classList.remove('hidden');
-                navBadge.classList.remove('hidden');
-                navDisplay.innerText = currentUser.substring(0, 10) + '...';
-                document.getElementById('user-display-address').innerText = currentUser;
-                document.getElementById('user-display-balance').innerText = `${calculateBalance(currentUser)} BAM`;
-                txSenderInput.value = currentUser;
-                minerBadge.innerText = currentUser.substring(0, 10) + '...';
-            } else {
-                authBox.classList.remove('hidden');
-                dashBox.classList.add('hidden');
-                navBadge.classList.add('hidden');
-                txSenderInput.value = "Login to set sender";
-                minerBadge.innerText = "Login required";
-            }
+            document.getElementById('nav-address-display').innerText = currentUser.substring(0, 10) + '...';
+            document.getElementById('user-display-address').innerText = currentUser;
+            document.getElementById('user-display-balance').innerText = `${calculateBalance(currentUser)} BAM`;
+            document.getElementById('tx-sender').value = currentUser;
+            document.getElementById('miner-dest-badge').innerText = currentUser.substring(0, 10) + '...';
 
             document.getElementById('stat-blocks').innerText = blockchain.length;
             document.getElementById('stat-supply').innerText = `${blockchain.length * 50} BAM`;
