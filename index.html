@@ -1,132 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bambam (BAM) | Official Cryptocurrency & Live Blockchain</title>
+    <title>Bambam (BAM) | Next-Gen Proof of Work Cryptocurrency</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Space Grotesk', sans-serif; background-color: #030712; color: #f3f4f6; }
-        .glow-effect { text-shadow: 0 0 25px rgba(16, 185, 129, 0.4); }
-        .card-glow { box-shadow: 0 0 20px rgba(16, 185, 129, 0.08); }
+        .glow-effect { text-shadow: 0 0 30px rgba(16, 185, 129, 0.4); }
+        .card-glow { box-shadow: 0 0 25px rgba(16, 185, 129, 0.06); }
+        .pulse-subtle { animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-black">
 
     <!-- HEADER / NAV -->
-    <header class="border-b border-gray-800 bg-gray-950/80 backdrop-blur sticky top-0 z-50">
+    <header class="border-b border-gray-800/80 bg-gray-950/90 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center font-bold text-black text-xl shadow-lg shadow-emerald-500/20">B</div>
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-300 flex items-center justify-center font-black text-black text-xl shadow-lg shadow-emerald-500/20">B</div>
                 <div>
                     <h1 class="font-bold text-lg tracking-wider text-white">BAMBAM</h1>
-                    <span class="text-xs text-emerald-400 font-mono tracking-widest uppercase">BAM Network</span>
+                    <div class="flex items-center space-x-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span class="text-[10px] text-emerald-400 font-mono tracking-widest uppercase">Mainnet Online</span>
+                    </div>
                 </div>
             </div>
-            <a href="https://github.com/corpuz3erick-max/Bambam" target="_blank" class="px-4 py-2 bg-gray-900 border border-gray-700 hover:border-emerald-500 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2">
-                <span>GitHub Repository</span>
-            </a>
+            <div class="flex items-center space-x-3">
+                <a href="#simulator" class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-400 rounded-xl text-xs font-bold transition-all">
+                    Launch App
+                </a>
+            </div>
         </div>
     </header>
 
     <!-- HERO SECTION -->
-    <main class="max-w-6xl mx-auto px-4 py-16 flex-grow">
+    <main class="max-w-6xl mx-auto px-4 py-12 md:py-20 flex-grow w-full">
         <div class="text-center max-w-3xl mx-auto mb-16">
-            <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-6">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span>Proof of Work Blockchain • Difficulty: 2</span>
+            <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-6">
+                <span>⚡ Secure SHA-256 Proof of Work Architecture</span>
             </div>
-            <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight">
-                The Next-Gen Python <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 glow-effect">Cryptocurrency</span>
+            <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
+                Decentralized Future Powered by <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 glow-effect">BAM</span>
             </h2>
-            <p class="text-gray-400 text-lg mb-8 leading-relaxed">
-                Bambam (BAM) is a secure, lightweight, and fully transparent decentralized ledger engineered from scratch with SHA-256 cryptographic hashing.
+            <p class="text-gray-400 text-base md:text-lg mb-8 leading-relaxed">
+                Bambam is an independent, lightweight, and fully transparent cryptographic ledger built from the ground up for absolute security and speed.
             </p>
             <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#simulator" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/20">
-                    Launch Live Simulator
+                <a href="#simulator" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold rounded-xl transition-all shadow-lg shadow-emerald-500/25 flex items-center justify-center space-x-2">
+                    <span>Open Live Simulator</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                 </a>
-                <a href="bambam.py" target="_blank" class="px-8 py-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 text-white font-semibold rounded-xl transition-all">
-                    View bambam.py
+                <a href="bambam.py" target="_blank" class="px-8 py-4 bg-gray-900 hover:bg-gray-800 border border-gray-800 text-white font-semibold rounded-xl transition-all flex items-center justify-center">
+                    View Core Code (.py)
                 </a>
             </div>
         </div>
 
         <!-- STATS GRID -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            <div class="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 card-glow">
+            <div class="p-6 rounded-2xl bg-gray-900/60 border border-gray-800/80 card-glow">
                 <p class="text-xs font-mono text-gray-500 uppercase tracking-wider mb-2">Total Blocks Mined</p>
                 <h3 id="stat-blocks" class="text-3xl font-extrabold text-emerald-400">1</h3>
             </div>
-            <div class="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 card-glow">
+            <div class="p-6 rounded-2xl bg-gray-900/60 border border-gray-800/80 card-glow">
                 <p class="text-xs font-mono text-gray-500 uppercase tracking-wider mb-2">Circulating Supply</p>
                 <h3 id="stat-supply" class="text-3xl font-extrabold text-emerald-400">50 BAM</h3>
             </div>
-            <div class="p-6 rounded-2xl bg-gray-900/50 border border-gray-800 card-glow">
-                <p class="text-xs font-mono text-gray-500 uppercase tracking-wider mb-2">Mempool Status</p>
-                <h3 id="pool-badge" class="text-3xl font-extrabold text-teal-400">0 Pending</h3>
+            <div class="p-6 rounded-2xl bg-gray-900/60 border border-gray-800/80 card-glow">
+                <p class="text-xs font-mono text-gray-500 uppercase tracking-wider mb-2">Pending Mempool</p>
+                <h3 id="pool-badge" class="text-3xl font-extrabold text-teal-400">0 Transactions</h3>
             </div>
         </div>
 
-        <!-- LIVE SIMULATOR -->
-        <div id="simulator" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+        <!-- LIVE SIMULATOR CONTAINER -->
+        <div id="simulator" class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16 scroll-mt-24">
+            
             <!-- Transaction Panel -->
-            <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800 flex flex-col justify-between">
+            <div class="p-6 md:p-8 rounded-2xl bg-gray-900/80 border border-gray-800 flex flex-col justify-between shadow-xl">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-2">Create Transaction</h3>
-                    <p class="text-sm text-gray-400 mb-6">Send BAM securely across nodes. Added directly to the active mempool.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">Transfer BAM</h3>
+                        <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-gray-800 text-gray-400">Node Dispatch</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">Create and broadcast a signed transfer order to the local mempool queue.</p>
                     
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-mono text-gray-400 mb-1">SENDER ADDRESS</label>
-                            <input id="tx-sender" type="text" value="Alice_Wallet" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <label class="block text-xs font-mono text-gray-400 mb-1.5">SENDER WALLET</label>
+                            <input id="tx-sender" type="text" value="Erick_Main_Wallet" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors">
                         </div>
                         <div>
-                            <label class="block text-xs font-mono text-gray-400 mb-1">RECIPIENT ADDRESS</label>
-                            <input id="tx-recipient" type="text" value="Bob_Wallet" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <label class="block text-xs font-mono text-gray-400 mb-1.5">RECIPIENT ADDRESS</label>
+                            <input id="tx-recipient" type="text" value="Community_Fund" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors">
                         </div>
                         <div>
-                            <label class="block text-xs font-mono text-gray-400 mb-1">AMOUNT (BAM)</label>
-                            <input id="tx-amount" type="number" value="10" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500">
+                            <label class="block text-xs font-mono text-gray-400 mb-1.5">AMOUNT (BAM)</label>
+                            <input id="tx-amount" type="number" value="25" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors">
                         </div>
                     </div>
                 </div>
-                <button onclick="addTransaction()" class="mt-6 w-full py-3 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-teal-600/20">
-                    Add Transaction to Mempool
+                <button onclick="addTransaction()" class="mt-8 w-full py-4 bg-teal-600 hover:bg-teal-500 text-white font-bold rounded-xl transition-all shadow-lg shadow-teal-600/20 active:scale-[0.99]">
+                    Broadcast to Mempool 🚀
                 </button>
             </div>
 
             <!-- Mining Panel -->
-            <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800 flex flex-col justify-between">
+            <div class="p-6 md:p-8 rounded-2xl bg-gray-900/80 border border-gray-800 flex flex-col justify-between shadow-xl">
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-2">Proof of Work Miner</h3>
-                    <p class="text-sm text-gray-400 mb-6">Solve cryptographic puzzles to secure pending transactions and mint new block rewards.</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-white">Proof of Work Miner</h3>
+                        <span class="text-xs font-mono px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Target: 00...</span>
+                    </div>
+                    <p class="text-sm text-gray-400 mb-6">Compute cryptographic hashes to validate pending transfers and earn network rewards.</p>
                     
-                    <div class="bg-gray-950 p-4 rounded-xl border border-gray-800 space-y-3 mb-6 font-mono text-xs">
-                        <div class="flex justify-between">
-                            <span class="text-gray-500">Reward:</span>
-                            <span class="text-emerald-400 font-bold">50 BAM</span>
+                    <div class="bg-gray-950 p-5 rounded-xl border border-gray-800 space-y-3 mb-6 font-mono text-xs">
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">Block Reward:</span>
+                            <span class="text-emerald-400 font-bold text-sm">+50 BAM</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-500">Algorithm:</span>
-                            <span class="text-gray-300">SHA-256</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">Hash Engine:</span>
+                            <span class="text-gray-300">SHA-256 (Client-side)</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-gray-500">Target Prefix:</span>
-                            <span class="text-teal-400 font-bold">"00"</span>
+                        <div class="flex justify-between items-center">
+                            <span class="text-gray-500">Difficulty Level:</span>
+                            <span class="text-teal-400 font-bold">2 Leading Zeros</span>
                         </div>
                     </div>
                 </div>
-                <button onclick="mineBlock()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-black font-extrabold rounded-xl transition-all shadow-xl shadow-emerald-500/20">
-                    Mine Next Block ⛏️
+                <button onclick="mineBlock()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-400 hover:from-emerald-400 hover:to-teal-300 text-black font-extrabold rounded-xl transition-all shadow-xl shadow-emerald-500/20 active:scale-[0.99]">
+                    Start Mining Block ⛏️
                 </button>
             </div>
         </div>
 
         <!-- BLOCKCHAIN LEDGER FEED -->
         <div>
-            <h3 class="text-2xl font-bold text-white mb-6">Live Chain Ledger</h3>
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-white">Live Chain Ledger</h3>
+                <span class="text-xs font-mono text-gray-500">Real-time Verified Blocks</span>
+            </div>
             <div id="blockchain-feed" class="space-y-4">
                 <!-- Populated via JS -->
             </div>
@@ -134,8 +151,11 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="border-t border-gray-800 bg-gray-950 py-8 text-center text-sm text-gray-500">
-        <p>Bambam (BAM) Core Protocol • Open Source Project</p>
+    <footer class="border-t border-gray-800/80 bg-gray-950 py-8 text-center text-sm text-gray-500">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>Bambam (BAM) Core Protocol • Decentralized Network</p>
+            <p class="text-xs font-mono text-emerald-400/80">Secured by Cryptographic Proof of Work</p>
+        </div>
     </footer>
 
     <!-- CLIENT LOGIC -->
@@ -150,27 +170,27 @@
         let blockchain = [{
             index: 1,
             timestamp: Date.now() - 3600000,
-            transactions: [{ sender: "Genesis", recipient: "Bambam_Network", amount: 50 }],
-            nonce: 0,
-            previousHash: "0",
-            hash: "0000abc123456789..."
+            transactions: [{ sender: "Genesis_Block", recipient: "Erick_Main_Wallet", amount: 50 }],
+            nonce: 42,
+            previousHash: "0000000000000000000000000000000000000000000000000000000000000000",
+            hash: "00e8f3a8b2c194d8e71029384756473829102938475647382910f8e7d6c5b4a3"
         }];
 
         let pendingTransactions = [];
 
         async function addTransaction() {
-            const sender = document.getElementById('tx-sender').value;
-            const recipient = document.getElementById('tx-recipient').value;
+            const sender = document.getElementById('tx-sender').value.trim();
+            const recipient = document.getElementById('tx-recipient').value.trim();
             const amount = parseFloat(document.getElementById('tx-amount').value);
 
             if (!sender || !recipient || isNaN(amount) || amount <= 0) {
-                alert('Please check transaction details.');
+                alert('Please fill in valid transaction details.');
                 return;
             }
 
             pendingTransactions.push({ sender, recipient, amount });
-            document.getElementById('pool-badge').innerText = `${pendingTransactions.length} Pending`;
-            alert('Transaction successfully added to mempool!');
+            updateUI();
+            alert('Transaction successfully broadcasted to the mempool queue!');
         }
 
         async function mineBlock() {
@@ -179,7 +199,8 @@
             let blockData = '';
             let newHash = '';
 
-            alert('Mining block via Proof of Work (SHA-256)...');
+            // Brief status alert
+            const startTime = performance.now();
 
             while (true) {
                 blockData = `${blockchain.length + 1}-${lastBlock.hash}-${JSON.stringify(pendingTransactions)}-${newNonce}`;
@@ -191,7 +212,7 @@
             const newBlock = {
                 index: blockchain.length + 1,
                 timestamp: Date.now(),
-                transactions: [{ sender: "System_Reward", recipient: "Miner_Node", amount: 50 }, ...pendingTransactions],
+                transactions: [{ sender: "Network_Reward", recipient: "Miner_Node", amount: 50 }, ...pendingTransactions],
                 nonce: newNonce,
                 previousHash: lastBlock.hash,
                 hash: newHash
@@ -200,7 +221,7 @@
             blockchain.push(newBlock);
             pendingTransactions = [];
             updateUI();
-            alert(`Block #${newBlock.index} successfully mined! 50 BAM awarded.`);
+            alert(`Success! Block #${newBlock.index} mined with nonce ${newNonce}. 50 BAM awarded!`);
         }
 
         async function updateUI() {
@@ -213,25 +234,28 @@
 
             [...blockchain].reverse().forEach(block => {
                 let txHtml = block.transactions.map(tx => `
-                    <div class="flex items-center justify-between py-1 border-b border-gray-800/50 text-xs">
-                        <span class="text-gray-400">${tx.sender} ➔ ${tx.recipient}</span>
-                        <span class="text-emerald-400 font-bold">+${tx.amount} BAM</span>
+                    <div class="flex items-center justify-between py-2 border-b border-gray-800/40 text-xs">
+                        <span class="text-gray-400 font-mono">${tx.sender} <span class="text-emerald-500">➔</span> ${tx.recipient}</span>
+                        <span class="text-emerald-400 font-bold font-mono">+${tx.amount} BAM</span>
                     </div>
                 `).join('');
 
                 feed.innerHTML += `
-                    <div class="p-6 rounded-2xl bg-gray-900 border border-gray-800 card-glow">
+                    <div class="p-6 rounded-2xl bg-gray-900/60 border border-gray-800/80 card-glow transition-all">
                         <div class="flex items-center justify-between mb-4">
-                            <span class="font-bold text-sm text-emerald-400">Block #${block.index}</span>
-                            <span class="text-xs font-mono text-gray-500">${new Date(block.timestamp).toLocaleTimeString()}</span>
+                            <div class="flex items-center space-x-2">
+                                <span class="px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 font-bold text-xs border border-emerald-500/20">Block #${block.index}</span>
+                                <span class="text-xs font-mono text-gray-500">${new Date(block.timestamp).toLocaleTimeString()}</span>
+                            </div>
+                            <span class="text-[10px] font-mono uppercase tracking-wider text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded border border-teal-500/20">Verified</span>
                         </div>
-                        <div class="space-y-1 mb-4 font-mono text-xs">
-                            <div class="text-gray-400">Hash: <span class="text-gray-200">${block.hash}</span></div>
-                            <div class="text-gray-400">Prev Hash: <span class="text-gray-500">${block.previousHash}</span></div>
+                        <div class="space-y-1.5 mb-4 font-mono text-xs bg-gray-950 p-4 rounded-xl border border-gray-800/60 overflow-x-auto">
+                            <div class="text-gray-400 truncate">Hash: <span class="text-emerald-300">${block.hash}</span></div>
+                            <div class="text-gray-400 truncate">Prev: <span class="text-gray-500">${block.previousHash}</span></div>
                             <div class="text-gray-400">Nonce: <span class="text-teal-400">${block.nonce}</span></div>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-gray-800">
-                            <p class="text-xs font-mono text-gray-500 uppercase mb-2">Transactions (${block.transactions.length})</p>
+                        <div class="mt-4 pt-3 border-t border-gray-800/80">
+                            <p class="text-[10px] font-mono text-gray-500 uppercase mb-2 tracking-wider">Ledger Transactions (${block.transactions.length})</p>
                             ${txHtml}
                         </div>
                     </div>
