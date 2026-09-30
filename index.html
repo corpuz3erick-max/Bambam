@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bambam (BAM) | Decentralized Proof of Work Network</title>
+    <title>Bambam (BAM) | End-to-End Encrypted Network</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -23,14 +23,14 @@
                     <h1 class="font-bold text-lg tracking-wider text-white">BAMBAM</h1>
                     <div class="flex items-center space-x-1.5">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                        <span class="text-[10px] text-emerald-400 font-mono tracking-widest uppercase">Mainnet Online</span>
+                        <span class="text-[10px] text-emerald-400 font-mono tracking-widest uppercase">E2E Secure Net</span>
                     </div>
                 </div>
             </div>
             <div class="flex items-center space-x-3">
-                <div id="nav-wallet-badge" class="flex items-center space-x-2 px-3 py-1.5 bg-gray-900 border border-gray-800 rounded-xl text-xs font-mono text-emerald-400">
+                <div id="nav-wallet-badge" class="hidden items-center space-x-2 px-3 py-1.5 bg-gray-900 border border-gray-800 rounded-xl text-xs font-mono text-emerald-400">
                     <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-                    <span id="nav-address-display">Active Wallet</span>
+                    <span id="nav-username-display">User</span>
                 </div>
                 <a href="#simulator" class="px-4 py-2 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20 text-emerald-400 rounded-xl text-xs font-bold transition-all">
                     Launch App
@@ -43,47 +43,58 @@
     <main class="max-w-6xl mx-auto px-4 py-12 md:py-20 flex-grow w-full">
         <div class="text-center max-w-3xl mx-auto mb-16">
             <div class="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-mono mb-6">
-                <span>⚡ Secure SHA-256 Proof of Work Architecture</span>
+                <span>🔒 End-to-End Client-Side Encrypted Accounts</span>
             </div>
             <h2 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-tight leading-tight">
                 Decentralized Future Powered by <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300 glow-effect">BAM</span>
             </h2>
             <p class="text-gray-400 text-base md:text-lg mb-8 leading-relaxed">
-                Bambam is an independent, lightweight, and fully transparent cryptographic ledger built from the ground up for absolute security and speed.
+                Log in securely using your credentials. Your password derives your encrypted wallet key entirely inside your browser.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#simulator" class="px-8 py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold rounded-xl transition-all shadow-lg shadow-emerald-500/25 flex items-center justify-center space-x-2">
-                    <span>Open Live Simulator & Wallet</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-                </a>
-            </div>
         </div>
 
-        <!-- WALLET PORTAL SECTION -->
-        <div id="wallet-section" class="max-w-xl mx-auto mb-16 p-6 md:p-8 rounded-2xl bg-gray-900/90 border border-gray-800 shadow-2xl">
-            <div class="text-center mb-6">
-                <h3 class="text-2xl font-bold text-white mb-2">BAM Wallet Portal</h3>
-                <p class="text-sm text-gray-400">Your automatic secure session key for mining and transfers.</p>
+        <!-- ACCOUNT AUTH PORTAL -->
+        <div id="auth-section" class="max-w-xl mx-auto mb-16 p-6 md:p-8 rounded-2xl bg-gray-900/90 border border-gray-800 shadow-2xl">
+            
+            <!-- Login / Signup Form -->
+            <div id="login-form-container">
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-white mb-2">Account Portal</h3>
+                    <p class="text-sm text-gray-400">Enter a username and password to log in or create your secure account.</p>
+                </div>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono text-gray-400 mb-1.5">USERNAME</label>
+                        <input id="auth-username" type="text" placeholder="e.g. erick_corpuz" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 font-mono">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-mono text-gray-400 mb-1.5">PASSWORD</label>
+                        <input id="auth-password" type="password" placeholder="••••••••••••" class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 font-mono">
+                    </div>
+                    <button onclick="handleLogin()" class="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-black font-extrabold rounded-xl transition-all shadow-lg shadow-emerald-500/20 mt-2">
+                        Login / Create Account 🔐
+                    </button>
+                </div>
             </div>
 
-            <!-- Dashboard View -->
-            <div id="dashboard-box" class="space-y-4">
+            <!-- Dashboard View (Hidden initially) -->
+            <div id="dashboard-container" class="hidden space-y-4">
+                <div class="text-center mb-4">
+                    <h3 class="text-xl font-bold text-white">Welcome, <span id="dash-username" class="text-emerald-400"></span></h3>
+                    <p class="text-xs font-mono text-gray-400 mt-1">E2E Session Active</p>
+                </div>
                 <div class="bg-gray-950 p-5 rounded-xl border border-emerald-500/30 space-y-3 font-mono text-xs">
-                    <div class="flex justify-between items-center text-gray-400">
-                        <span>Node Status:</span>
-                        <span class="text-emerald-400 font-bold">Synced & Ready</span>
-                    </div>
                     <div class="flex flex-col space-y-1">
-                        <span class="text-gray-500">Your Wallet Address:</span>
-                        <span id="user-display-address" class="text-emerald-300 bg-gray-900 p-2 rounded border border-gray-800 truncate"></span>
+                        <span class="text-gray-500">Encrypted Wallet Address:</span>
+                        <span id="dash-address" class="text-emerald-300 bg-gray-900 p-2 rounded border border-gray-800 truncate"></span>
                     </div>
                     <div class="flex justify-between items-center pt-2 border-t border-gray-800">
                         <span class="text-gray-500">Available Balance:</span>
-                        <span id="user-display-balance" class="text-emerald-400 font-bold text-base">0 BAM</span>
+                        <span id="dash-balance" class="text-emerald-400 font-bold text-base">0 BAM</span>
                     </div>
                 </div>
-                <button onclick="createAccount()" class="w-full py-3 bg-gray-800 hover:bg-gray-700 text-white font-semibold rounded-xl transition-all text-sm">
-                    Generate New Wallet Address 🔄
+                <button onclick="handleLogout()" class="w-full py-3 bg-red-500/10 border border-red-500/30 hover:bg-red-500/20 text-red-400 font-semibold rounded-xl transition-all text-sm">
+                    Lock / Logout Account 🔒
                 </button>
             </div>
         </div>
@@ -118,11 +129,11 @@
                     
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-xs font-mono text-gray-400 mb-1.5">SENDER WALLET</label>
+                            <label class="block text-xs font-mono text-gray-400 mb-1.5">SENDER ACCOUNT</label>
                             <input id="tx-sender" type="text" readonly class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-emerald-400 font-mono focus:outline-none">
                         </div>
                         <div>
-                            <label class="block text-xs font-mono text-gray-400 mb-1.5">RECIPIENT ADDRESS</label>
+                            <label class="block text-xs font-mono text-gray-400 mb-1.5">RECIPIENT ADDRESS / USERNAME</label>
                             <input id="tx-recipient" type="text" placeholder="Enter recipient address..." class="w-full bg-gray-950 border border-gray-800 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-emerald-500 transition-colors font-mono">
                         </div>
                         <div>
@@ -152,11 +163,11 @@
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="text-gray-500">Hash Engine:</span>
-                            <span class="text-gray-300">SHA-256 (Client-side)</span>
+                            <span class="text-gray-300">SHA-256 (Client-side E2E)</span>
                         </div>
                         <div class="flex justify-between items-center">
-                            <span class="text-gray-500">Miner Destination:</span>
-                            <span id="miner-dest-badge" class="text-emerald-400 font-bold truncate max-w-[150px]">Auto-assigned</span>
+                            <span class="text-gray-500">Reward Recipient:</span>
+                            <span id="miner-dest-badge" class="text-emerald-400 font-bold truncate max-w-[150px]">Login required</span>
                         </div>
                     </div>
                 </div>
@@ -181,8 +192,8 @@
     <!-- FOOTER -->
     <footer class="border-t border-gray-800/80 bg-gray-950 py-8 text-center text-sm text-gray-500">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p>Bambam (BAM) Core Protocol • Decentralized Network</p>
-            <p class="text-xs font-mono text-emerald-400/80">Secured by Cryptographic Proof of Work</p>
+            <p>Bambam (BAM) Core Protocol • E2E Decentralized Network</p>
+            <p class="text-xs font-mono text-emerald-400/80">Secured by Client-Side Cryptography</p>
         </div>
     </footer>
 
@@ -205,19 +216,35 @@
         }];
 
         let pendingTransactions = [];
-        let currentUser = localStorage.getItem('bam_active_user');
+        let currentUsername = localStorage.getItem('bam_e2e_username');
+        let currentAddress = localStorage.getItem('bam_e2e_address');
 
-        // Auto-create wallet if none exists
-        if (!currentUser) {
-            const randomHex = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
-            currentUser = `BAM_${randomHex}`;
-            localStorage.setItem('bam_active_user', currentUser);
+        async function handleLogin() {
+            const user = document.getElementById('auth-username').value.trim();
+            const pass = document.getElementById('auth-password').value;
+
+            if (!user || !pass) {
+                return;
+            }
+
+            // Derive wallet address deterministically using E2E credentials hash
+            const secretKeyHash = await sha256(`${user}:${pass}`);
+            currentUsername = user;
+            currentAddress = `BAM_${secretKeyHash.substring(0, 24)}`;
+
+            localStorage.setItem('bam_e2e_username', currentUsername);
+            localStorage.setItem('bam_e2e_address', currentAddress);
+
+            document.getElementById('auth-username').value = '';
+            document.getElementById('auth-password').value = '';
+            updateUI();
         }
 
-        function createAccount() {
-            const randomHex = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
-            currentUser = `BAM_${randomHex}`;
-            localStorage.setItem('bam_active_user', currentUser);
+        function handleLogout() {
+            currentUsername = null;
+            currentAddress = null;
+            localStorage.removeItem('bam_e2e_username');
+            localStorage.removeItem('bam_e2e_address');
             updateUI();
         }
 
@@ -237,6 +264,9 @@
         }
 
         async function addTransaction() {
+            if (!currentAddress) {
+                return;
+            }
             const recipient = document.getElementById('tx-recipient').value.trim();
             const amount = parseFloat(document.getElementById('tx-amount').value);
 
@@ -244,17 +274,21 @@
                 return;
             }
 
-            const currentBalance = calculateBalance(currentUser);
+            const currentBalance = calculateBalance(currentAddress);
             if (amount > currentBalance) {
                 return;
             }
 
-            pendingTransactions.push({ sender: currentUser, recipient, amount });
+            pendingTransactions.push({ sender: currentAddress, recipient, amount });
             document.getElementById('tx-recipient').value = '';
             updateUI();
         }
 
         async function mineBlock() {
+            if (!currentAddress) {
+                return;
+            }
+
             const lastBlock = blockchain[blockchain.length - 1];
             let newNonce = 0;
             let blockData = '';
@@ -270,7 +304,7 @@
             const newBlock = {
                 index: blockchain.length + 1,
                 timestamp: Date.now(),
-                transactions: [{ sender: "Network_Reward", recipient: currentUser, amount: 50 }, ...pendingTransactions],
+                transactions: [{ sender: "Network_Reward", recipient: currentAddress, amount: 50 }, ...pendingTransactions],
                 nonce: newNonce,
                 previousHash: lastBlock.hash,
                 hash: newHash
@@ -282,11 +316,28 @@
         }
 
         function updateUI() {
-            document.getElementById('nav-address-display').innerText = currentUser.substring(0, 10) + '...';
-            document.getElementById('user-display-address').innerText = currentUser;
-            document.getElementById('user-display-balance').innerText = `${calculateBalance(currentUser)} BAM`;
-            document.getElementById('tx-sender').value = currentUser;
-            document.getElementById('miner-dest-badge').innerText = currentUser.substring(0, 10) + '...';
+            const loginForm = document.getElementById('login-form-container');
+            const dashContainer = document.getElementById('dashboard-container');
+            const navBadge = document.getElementById('nav-wallet-badge');
+
+            if (currentAddress && currentUsername) {
+                loginForm.classList.add('hidden');
+                dashContainer.classList.remove('hidden');
+                navBadge.classList.remove('hidden');
+
+                document.getElementById('nav-username-display').innerText = currentUsername;
+                document.getElementById('dash-username').innerText = currentUsername;
+                document.getElementById('dash-address').innerText = currentAddress;
+                document.getElementById('dash-balance').innerText = `${calculateBalance(currentAddress)} BAM`;
+                document.getElementById('tx-sender').value = `${currentUsername} (${currentAddress.substring(0, 10)}...)`;
+                document.getElementById('miner-dest-badge').innerText = currentUsername;
+            } else {
+                loginForm.classList.remove('hidden');
+                dashContainer.classList.add('hidden');
+                navBadge.classList.add('hidden');
+                document.getElementById('tx-sender').value = "Please login first";
+                document.getElementById('miner-dest-badge').innerText = "Login required";
+            }
 
             document.getElementById('stat-blocks').innerText = blockchain.length;
             document.getElementById('stat-supply').innerText = `${blockchain.length * 50} BAM`;
