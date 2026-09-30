@@ -1,4 +1,3 @@
-
 # Bambam (BAM) Blockchain & Cryptocurrency
 A custom, lightweight blockchain built completely from scratch in Python. 
 
